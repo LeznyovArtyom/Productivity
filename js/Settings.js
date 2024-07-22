@@ -12,7 +12,7 @@ function loadUserAndRoles() {
     const accessToken = getCookie('access_token');
     
     // Получаем информацию о пользователе
-    const userRequest = fetch(`${link}/users/me`, {
+    const userRequest = fetch(`/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ function loadUserAndRoles() {
     });
 
     // Получаем список ролей
-    const rolesRequest = fetch(`${link}/roles`, {
+    const rolesRequest = fetch(`/roles`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -165,7 +165,7 @@ function download(input) {
 async function updateUser(field, value) {
     const accessToken = getCookie('access_token');
 
-    fetch(`${link}/users/me/update`, {
+    fetch(`/users/me/update`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ async function updateUser(field, value) {
 // Удалить аккаунт
 document.getElementById('deleteButton').addEventListener('click', function() {
     const accessToken = getCookie('access_token');
-    fetch(`${link}/users/me/delete`, {
+    fetch(`/users/me/delete`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${accessToken}`

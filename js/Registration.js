@@ -69,7 +69,7 @@ async function addUser(userInputs) {
     };
     
     try {
-        let response = await fetch(`${link}/users/register`, {
+        let response = await fetch(`/users/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

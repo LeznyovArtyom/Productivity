@@ -12,7 +12,7 @@ function getUser() {
     const accessToken = getCookie('access_token');
     
     // Отправляем AJAX запрос к API
-    fetch(`${link}/users/me`, {
+    fetch(`/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ form.addEventListener("submit", async e => {
     };
 
     // Отправляем данные на сервер
-    fetch(`${link}/users/me/tasks/add`, {
+    fetch(`/users/me/tasks/add`, {
         method: 'POST',
         body: JSON.stringify(newTask),
         headers: {

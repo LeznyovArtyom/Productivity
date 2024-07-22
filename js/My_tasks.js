@@ -27,7 +27,7 @@ function getTasks() {
     const accessToken = getCookie('access_token');
     
     // Отправляем AJAX запрос к API
-    fetch(`${link}/users/me/tasks`, {
+    fetch(`/users/me/tasks`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ function getUser() {
     const accessToken = getCookie('access_token');
     
     // Отправляем AJAX запрос к API
-    fetch(`${link}/users/me`, {
+    fetch(`/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

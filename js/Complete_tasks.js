@@ -15,7 +15,7 @@ function getTasks() {
     const accessToken = getCookie('access_token');
     
     // Отправляем AJAX запрос к API
-    fetch(`${link}/users/me/tasks`, {
+    fetch(`/users/me/tasks`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ function updateTaskStatus(taskId, status) {
             return;
     }
 
-    fetch(`${link}/tasks/${taskId}/update`, {
+    fetch(`/tasks/${taskId}/update`, {
         method: 'PUT',
         body: JSON.stringify({ 'status_id': statusId }),
         headers: {
@@ -155,7 +155,7 @@ function getUser() {
     const accessToken = getCookie('access_token');
     
     // Отправляем AJAX запрос к API
-    fetch(`${link}/users/me`, {
+    fetch(`/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

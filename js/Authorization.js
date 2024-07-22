@@ -26,7 +26,7 @@
 // Авторизировать пользователя
 const authenticateUser = async (login_value, password_value) => {
     try {
-        let response = await fetch(`${link}/users/login`, {
+        let response = await fetch(`/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

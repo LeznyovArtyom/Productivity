@@ -17,7 +17,7 @@ function getUser() {
     const accessToken = getCookie('access_token');
     
     // Отправляем AJAX запрос к API
-    fetch(`${link}/users/me`, {
+    fetch(`/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function getTask() {
     let task_id = urlParams.get('id');
 
     // Отправляем AJAX запрос к API
-    fetch(`${link}/tasks/${task_id}`, {
+    fetch(`/tasks/${task_id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ function saveTask() {
         deadline: task_deadline
     };
 
-    fetch(`${link}/tasks/${task_id}/update`, {
+    fetch(`/tasks/${task_id}/update`, {
         method: 'PUT',
         body: JSON.stringify(updatedTask),
         headers: {
@@ -175,7 +175,7 @@ document.getElementById('deleteButton').addEventListener('click', function() {
     let urlParams = new URLSearchParams(window.location.search);
     let task_id = urlParams.get('id');
 
-    fetch(`${link}/tasks/${task_id}/update`, {
+    fetch(`/tasks/${task_id}/update`, {
         method: 'PUT',
         body: JSON.stringify({'status_id': 4}),
         headers: {
