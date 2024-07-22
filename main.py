@@ -20,7 +20,7 @@ import base64
 
 
 # DATABASE_URL = "mysql+aiomysql://root:TikTakfoke86!@localhost:3306/Productivity"
-DATABASE_URL = f"mysql+pymysql://root:PApMPOEEpPmxXCRtXpGgzCErCNIjihtJ@roundhouse.proxy.rlwy.net:45012/Productivity"
+DATABASE_URL = f"mysql+aiomysql://root:PApMPOEEpPmxXCRtXpGgzCErCNIjihtJ@roundhouse.proxy.rlwy.net:45012/Productivity"
 
 # Создание асинхронного двигателя и базы данных
 database = Database(DATABASE_URL)
