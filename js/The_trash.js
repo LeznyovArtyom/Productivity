@@ -23,7 +23,7 @@ function getUser() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     })
@@ -74,7 +74,7 @@ function getTasks() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     })
@@ -103,7 +103,7 @@ function displayTasks(tasks) {
     tasks.forEach(function (task) {
         if (task.status === "Удалено") {
             let taskElement = document.createElement('a');
-            taskElement.href = "The_task.html?id=" + task.id;
+            taskElement.href = "/the_task?id=" + task.id;
             taskElement.innerHTML = `
                 <div class="task w-100 d-flex align-items-center justify-content-between pe-5 ps-3 py-3 mb-4">
                     <div class="d-flex task_elems">
@@ -172,7 +172,7 @@ function updateTaskStatus(taskId, status) {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         if (response.ok) {
             window.location.reload();

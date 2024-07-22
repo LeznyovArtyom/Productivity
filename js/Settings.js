@@ -21,7 +21,7 @@ function loadUserAndRoles() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     });
@@ -36,7 +36,7 @@ function loadUserAndRoles() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     });
@@ -175,7 +175,7 @@ async function updateUser(field, value) {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         alert('Данные успешно обновлены');
         window.location.reload();
@@ -197,10 +197,10 @@ document.getElementById('deleteButton').addEventListener('click', function() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         deleteCookie('access_token'); // Удаляем куки с токеном доступа
-        window.location.href = 'index.html';
+        window.location.href = '/';
     })
     .catch(error => {
         console.error('Ошибка при удалении аккаунта:', error);
@@ -211,7 +211,7 @@ document.getElementById('deleteButton').addEventListener('click', function() {
 // Выход из аккаунта
 document.getElementById('go_out_button').addEventListener('click', function() {
     deleteCookie('access_token'); // Удаляем куки с токеном доступа
-    window.location.href = 'index.html';
+    window.location.href = '/';
 });
 
 

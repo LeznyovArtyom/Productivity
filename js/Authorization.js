@@ -40,7 +40,7 @@ const authenticateUser = async (login_value, password_value) => {
         if (response.ok) {
             let data = await response.json();
             setCookie('access_token', data.access_token); // Сохранение токена доступа авторизации в куки
-            window.location.href = "My_tasks.html";
+            window.location.href = "/my_tasks";
         } else {
             let errorData = await response.json();
             alert(errorData.error || 'Произошла ошибка при авторизации. Попробуйте еще раз.');

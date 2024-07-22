@@ -26,7 +26,7 @@ function getUser() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     })
@@ -80,7 +80,7 @@ function getTask() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     })
@@ -147,7 +147,7 @@ function saveTask() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         if (response.ok) {
             window.location.reload();
@@ -184,9 +184,9 @@ document.getElementById('deleteButton').addEventListener('click', function() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
-        window.location.href = 'My_tasks.html';
+        window.location.href = '/my_tasks';
     })
     .catch(error => {
         console.error('Ошибка при удалении задачи:', error);

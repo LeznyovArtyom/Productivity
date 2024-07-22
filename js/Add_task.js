@@ -21,7 +21,7 @@ function getUser() {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         return response.json()
     })
@@ -89,10 +89,10 @@ form.addEventListener("submit", async e => {
     })
     .then(response => {
         if (response.status === 403) {
-            window.location.href = "index.html";
+            window.location.href = "/";
         }
         form.reset(); // Очищаем форму
-        window.location.href = "My_tasks.html";
+        window.location.href = "/my_tasks";
     })
     .catch(error => {
         console.error('Ошибка при добавлении задачи:', error);

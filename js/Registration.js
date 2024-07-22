@@ -79,7 +79,7 @@ async function addUser(userInputs) {
 
         if (response.ok) {
             document.getElementById('registration_form').reset();
-            window.location.href = 'index.html';
+            window.location.href = '/';
         } else {
             let errorData = await response.json();
             alert(errorData.error || 'Произошла ошибка при регистрации. Попробуйте еще раз.');
