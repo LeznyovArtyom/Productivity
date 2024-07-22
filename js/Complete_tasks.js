@@ -1,6 +1,3 @@
-const link = "http://localhost:8000";
-
-
 // При загрузке страницы
 document.addEventListener('DOMContentLoaded', function () {
     // Получаем задачи из базы данных

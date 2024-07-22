@@ -1,6 +1,3 @@
-const link = "http://localhost:8000";
-
-
 // При загрузке страницы
 document.addEventListener('DOMContentLoaded', function () {
     // Получаем роли и информацию о пользователе из базы данных

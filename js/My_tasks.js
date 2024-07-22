@@ -1,6 +1,3 @@
-const link = "http://localhost:8000";
-
-
 // При загрузке страницы
 document.addEventListener('DOMContentLoaded', function () {
     const accessToken = getCookie('access_token');

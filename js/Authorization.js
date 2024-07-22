@@ -1,5 +1,3 @@
-const link = "http://localhost:8000";
-
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
     'use strict'
@@ -45,7 +43,7 @@ const authenticateUser = async (login_value, password_value) => {
             window.location.href = "My_tasks.html";
         } else {
             let errorData = await response.json();
-            console.log(errorData);
+            alert(errorData.error || 'Произошла ошибка при авторизации. Попробуйте еще раз.');
         }
     } catch (error) {
         console.error('Ошибка:', error);
