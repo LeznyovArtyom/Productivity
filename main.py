@@ -17,10 +17,11 @@ import jwt
 from models import User, Task, Role
 from starlette.middleware.cors import CORSMiddleware
 import base64
+import os
 
 
-# DATABASE_URL = "mysql+aiomysql://root:TikTakfoke86!@localhost:3306/Productivity"
-DATABASE_URL = f"mysql+aiomysql://root:PApMPOEEpPmxXCRtXpGgzCErCNIjihtJ@roundhouse.proxy.rlwy.net:45012/Productivity"
+DATABASE_URL = "mysql+aiomysql://root:TikTakfoke86!@localhost:3306/Productivity"
+
 
 # Создание асинхронного двигателя и базы данных
 database = Database(DATABASE_URL)
@@ -77,12 +78,10 @@ class JWTAuthanticationBackend(AuthenticationBackend):
         auth = request.headers["authorization"]
         scheme, token = auth.split()
         if scheme.lower() != 'bearer':
-            # return UnauthenticatedUser(), AuthCredentials([])
             return None
 
         payload = decode_access_token(token)
         if payload is None:
-            # return UnauthenticatedUser(), AuthCredentials([])
             return None
 
         return AuthCredentials(["authenticated"]), SimpleUser(payload["sub"])
@@ -172,10 +171,19 @@ async def register_new_user(request):
             existing_user = result.scalar_one_or_none()
             if existing_user:
                 return JSONResponse({"error": "Пользователь с таким логином уже существует"}, status_code=400)
-
+            
             try:
                 # Декодируем изображение из base64
-                image_data = base64.b64decode(data['image'])
+                # image_data = base64.b64decode(data['image'])
+
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                # Получить абсолютный путь к файлу image2.jpg
+                image_path = os.path.join(current_dir, 'images/профиль.jpg')
+
+                # Читаем изображение как байты
+                with open(image_path, 'rb') as image_file:
+                    image_data = image_file.read()
+
 
                 user = User(
                     name=data['name'],
@@ -188,8 +196,10 @@ async def register_new_user(request):
                 await session.commit()
                 return JSONResponse({"message": "Пользователь успешно зарегистрирован"})
             except Exception as e:
+                print(f"Ошибка при регистрации пользователя: {e}")
                 await session.rollback()
                 return JSONResponse({"error": str(e)}, status_code=400)
+        await session.close()
             
 
 # Авторизовать пользователя
@@ -199,10 +209,10 @@ async def login_user(request):
         async with session.begin():
             result = await session.execute(select(User).filter(User.login == data['login']))
             user = result.scalar_one_or_none()
-    if user and verify_password(data['password'], user.password):
-        token = create_access_token(data={'sub': user.login})
-        return JSONResponse({"access_token": token}, status_code=200)
-    return JSONResponse({"error": "Неправильные данные"}, status_code=401)
+            if user and verify_password(data['password'], user.password):
+                token = create_access_token(data={'sub': user.login})
+                return JSONResponse({"access_token": token}, status_code=200)
+            return JSONResponse({"error": "Неправильные данные"}, status_code=401)
 
 
 # Обновить инфорацию о пользователе
@@ -274,6 +284,7 @@ async def get_task_by_id(request):
                     "deadline": task.deadline.isoformat() if task.deadline else None 
                 }})
     return JSONResponse({"error": "Информация о задаче не найдена"}, status_code=404)
+
 
 # Удалить задачу
 @requires("authenticated")
@@ -366,7 +377,7 @@ routes = [
     Mount("/js", StaticFiles(directory="js"), name="js"),
     Mount("/images", StaticFiles(directory="images"), name="images"),
     Route("/users/me", get_user_info, methods=["GET"]),
-    Route("/users/me/delete", delete_user, methods=["DELETE"]),
+    Route("/users/me/delete", delete_user, methods=["DELETE", "POST"]),
     Route("/users/register", register_new_user, methods=["POST"]),
     Route("/users/login", login_user, methods=["POST"]),
     Route("/users/me/update", update_user, methods=["PUT"]),
@@ -378,7 +389,7 @@ routes = [
     Route("/roles", get_roles, methods=["GET"]),
 ]
 
-app = Starlette(debug=True, routes=routes)
+app = Starlette(routes=routes)
 app.add_middleware(AuthenticationMiddleware, backend=JWTAuthanticationBackend())
 
 # Настройка CORS
