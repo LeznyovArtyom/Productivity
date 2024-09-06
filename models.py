@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine, text, Column , Integer, String, ForeignKey, DateTime, Text, LargeBinary
 from sqlalchemy.orm import relationship, sessionmaker, declarative_base
+import config
 
 
 # Строка подключения к серверу MySQL (без указания базы данных)
-DATABASE_SERVER_URL = "mysql+pymysql://root:TikTakfoke86!@localhost:3306/"
+DATABASE_SERVER_URL = f"mysql+pymysql://root:{config.password}@localhost:3306/"
 
 
 # Имя базы данных
